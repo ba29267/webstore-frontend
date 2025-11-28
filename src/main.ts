@@ -1,6 +1,16 @@
+// main.ts
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
+import { authInterceptor } from './app/auth-interceptor';
 import { App } from './app/app';
+import { routes } from './app/app.routes';
+import { provideRouter } from '@angular/router';
 
-bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(App, {
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(
+      withInterceptors([authInterceptor])
+    )
+  ]
+});
