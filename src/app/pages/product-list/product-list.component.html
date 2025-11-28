@@ -35,13 +35,16 @@
     </div>
     
     <div class="product-card" *ngFor="let p of filtered">
-      <h3>{{ p.name }}</h3>
+      <a [routerLink]="['/products', p.id]">
+  <h3>{{ p.name }}</h3>
+</a>
       <p>{{ p.description }}</p>
       <p><b>{{ p.price }}$</b></p>
       <p *ngIf="p.Category" style="font-size: 12px; color: #666;">
         Category: {{ p.Category.name }}
       </p>
-      <button>Add to Cart</button>
+      <button
+      (click)="addToCart()">Add to Cart</button>
     </div>
   </div>
 </div>

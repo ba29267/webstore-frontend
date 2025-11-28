@@ -18,7 +18,8 @@
       <a routerLink="/login">Login</a>
       <a routerLink="/register">Register</a>
     </ng-container>
-
+    <a routerLink="/cart" *ngIf="isLoggedIn">Cart</a>
+    <a routerLink="/my-orders" *ngIf="isLoggedIn">My Orders</a>
     <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
   </div>
 </nav>

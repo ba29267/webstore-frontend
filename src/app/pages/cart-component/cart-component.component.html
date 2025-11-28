@@ -1,0 +1,24 @@
+<h2>Shopping Cart</h2>
+
+<div *ngIf="cart.length === 0">
+  <p>Your cart is empty.</p>
+</div>
+
+<div *ngFor="let item of cart" class="cart-item">
+
+  <h3>{{ item.name }}</h3>
+  <p>{{ item.price }}$</p>
+
+<input type="number"
+       [value]="item.quantity"
+       min="1"
+       (change)="changeQty(item.id, +$event.target.value)" />
+
+  <button (click)="remove(item.id)">Remove</button>
+
+</div>
+
+<div *ngIf="cart.length > 0" class="cart-summary">
+  <h3>Total: {{ total }}$</h3>
+  <button (click)="checkout()">Checkout</button>
+</div>

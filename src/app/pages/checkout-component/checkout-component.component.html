@@ -1,0 +1,36 @@
+<h2>Checkout</h2>
+
+<div *ngIf="cart.length === 0">
+  <p>Your cart is empty.</p>
+</div>
+
+<div *ngIf="cart.length > 0">
+
+  <h3>Your Items</h3>
+
+  <div *ngFor="let item of cart" class="checkout-item">
+    <strong>{{ item.name }}</strong>
+    <p>Quantity: {{ item.quantity }}</p>
+    <p>Price: {{ item.price }}$</p>
+  </div>
+
+  <h3>Total: {{ total }}$</h3>
+
+  <hr>
+
+  <h3>Customer Info</h3>
+
+  <form (ngSubmit)="submit()" #f="ngForm">
+
+    <input type="text" placeholder="Name" [(ngModel)]="client.name" name="name" required>
+
+    <input type="email" placeholder="Email" [(ngModel)]="client.email" name="email" required>
+
+    <input type="text" placeholder="Phone" [(ngModel)]="client.phone" name="phone" required>
+
+    <textarea placeholder="Address" [(ngModel)]="client.address" name="address" required></textarea>
+
+    <button type="submit" [disabled]="!f.valid">Place Order</button>
+  </form>
+
+</div>

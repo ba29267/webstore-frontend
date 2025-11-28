@@ -1,0 +1,17 @@
+.cart-item {
+  padding: 15px;
+  border-bottom: 1px solid #ccc;
+}
+
+.cart-summary {
+  margin-top: 20px;
+}
+
+button {
+  background: #1976d2;
+  color: white;
+  border: none;
+  padding: 7px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}

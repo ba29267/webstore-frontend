@@ -2,11 +2,13 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../services/product';
+import { RouterLink } from '@angular/router';
+import { CartService } from '../../services/cart';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,RouterLink],
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
@@ -25,6 +27,7 @@ export class ProductListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private cartService: CartService,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -74,4 +77,9 @@ export class ProductListComponent implements OnInit {
       return matchesSearch && matchesCategory;
     });
   }
+
+  addToCart() {
+  this.cartService.addItem(this.products.find(p => p.id === p.id));
+  alert('Added to cart!');
+}
 }

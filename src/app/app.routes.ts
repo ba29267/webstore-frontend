@@ -14,15 +14,18 @@ import { ManageSizesComponent } from './admin/manage-sizes/manage-sizes.componen
 import { ManageColorsComponent } from './admin/manage-colors/manage-colors.component';
 import { ManageGendersComponent } from './admin/manage-genders/manage-genders.component';
 import { ReportsComponent } from './admin/reports/reports.component';
+import { CartComponent } from './pages/cart-component/cart-component.component';
+import { CheckoutComponent } from './pages/checkout-component/checkout-component.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'products', pathMatch: 'full' },
   { path: 'products', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailComponent },
-  
+  { path: 'cart', component: CartComponent },
+  { path: 'checkout', component: CheckoutComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-
+  { path: 'my-orders', component: MyOrdersComponent },
   { path: 'my-orders', component: MyOrdersComponent },
   { path: 'orders', component: OrderListComponent },
   { path: 'orders/:id', component: OrderDetailComponent },
@@ -36,5 +39,5 @@ export const routes: Routes = [
   { path: 'admin/genders', component: ManageGendersComponent },
   { path: 'admin/reports', component: ReportsComponent },
 
-  { path: '**', redirectTo: 'products' } // Wildcard route for 404s
+  { path: '**', redirectTo: 'products' } 
 ];

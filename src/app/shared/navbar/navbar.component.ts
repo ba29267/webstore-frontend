@@ -17,7 +17,9 @@ export class NavbarComponent {
     this.auth.logout();
     this.router.navigate(['/login']);
   }
-
+  cart() {
+    this.router.navigate(['/cart']);
+  }
   get isLoggedIn() {
     return this.auth.isAuthenticated();
   }
