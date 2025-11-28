@@ -1,0 +1,26 @@
+<h2>{{ isEdit ? 'Edit Product' : 'Create Product' }}</h2>
+
+<form (ngSubmit)="submit()">
+  <input type="text" placeholder="Name" [(ngModel)]="product.name" name="name" required>
+
+  <textarea placeholder="Description" [(ngModel)]="product.description" name="desc"></textarea>
+
+  <input type="number" placeholder="Price" [(ngModel)]="product.price" name="price" required>
+
+  <input type="number" placeholder="Quantity" [(ngModel)]="product.quantity" name="qty" required>
+
+  <!-- The below fields expect IDs — you may replace these with dropdowns when you build Category/Brand management -->
+  <input type="number" placeholder="Brand ID" [(ngModel)]="product.brandId" name="brand">
+
+  <input type="number" placeholder="Category ID" [(ngModel)]="product.categoryId" name="cat">
+
+  <input type="number" placeholder="Size ID" [(ngModel)]="product.sizeId" name="size">
+
+  <input type="number" placeholder="Color ID" [(ngModel)]="product.colorId" name="color">
+
+  <input type="number" placeholder="Gender ID" [(ngModel)]="product.genderId" name="gender">
+
+  <button type="submit">
+    {{ isEdit ? 'Update' : 'Create' }}
+  </button>
+</form>

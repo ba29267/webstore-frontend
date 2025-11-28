@@ -1,0 +1,18 @@
+<h2>{{ id ? 'Edit Color' : 'New Color' }}</h2>
+
+<div *ngIf="loading">Loading...</div>
+
+<div *ngIf="!loading">
+  <label>Name:</label>
+  <input type="text" [(ngModel)]="model.name">
+
+  <label>Color Code (HEX):</label>
+  <input type="color" [(ngModel)]="model.hex">
+
+  <p>
+    Preview:
+    <span [style.background]="model.hex" style="display:inline-block;width:50px;height:30px;border:1px solid #000"></span>
+  </p>
+
+  <button (click)="save()">Save</button>
+</div>

@@ -1,0 +1,27 @@
+<h2>Admin – Categories</h2>
+
+<button (click)="create()">+ New Category</button>
+
+<p *ngIf="loading">Loading categories…</p>
+
+<p *ngIf="!loading && categories.length === 0">No categories found. Create one to get started!</p>
+
+<table *ngIf="!loading && categories.length > 0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of categories">
+      <td>{{ c.id }}</td>
+      <td>{{ c.name }}</td>
+      <td>
+        <button (click)="edit(c.id)">Edit</button>
+        <button (click)="delete(c.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

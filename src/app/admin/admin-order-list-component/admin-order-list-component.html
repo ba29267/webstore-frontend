@@ -1,0 +1,30 @@
+<h2>Admin – Orders</h2>
+
+<p *ngIf="loading">Loading orders…</p>
+
+<p *ngIf="!loading && orders.length === 0">No orders found.</p>
+
+<table *ngIf="!loading && orders.length > 0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Total</th>
+      <th>Status</th>
+      <th>Date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let o of orders">
+      <td>{{ o.id }}</td>
+      <td>{{ o.user?.email }}</td>
+      <td>${{ o.totalPrice }}</td>
+      <td>{{ o.status }}</td>
+      <td>{{ o.createdAt | date }}</td>
+      <td>
+        <button (click)="openOrder(o.id)">View</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,27 @@
+<h2>Admin – Sizes</h2>
+
+<button (click)="create()">+ New Size</button>
+
+<p *ngIf="loading">Loading sizes…</p>
+
+<p *ngIf="!loading && sizes.length === 0">No sizes found. Create one to get started!</p>
+
+<table *ngIf="!loading && sizes.length > 0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let s of sizes">
+      <td>{{ s.id }}</td>
+      <td>{{ s.name }}</td>
+      <td>
+        <button (click)="edit(s.id)">Edit</button>
+        <button (click)="delete(s.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

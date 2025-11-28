@@ -1,0 +1,27 @@
+<h2>Admin – Genders</h2>
+
+<button (click)="create()">+ New Gender</button>
+
+<p *ngIf="loading">Loading genders…</p>
+
+<p *ngIf="!loading && genders.length === 0">No genders found. Create one to get started!</p>
+
+<table *ngIf="!loading && genders.length > 0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let g of genders">
+      <td>{{ g.id }}</td>
+      <td>{{ g.name }}</td>
+      <td>
+        <button (click)="edit(g.id)">Edit</button>
+        <button (click)="delete(g.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

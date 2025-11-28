@@ -1,0 +1,27 @@
+<h2>Admin – Brands</h2>
+
+<button (click)="create()">+ New Brand</button>
+
+<p *ngIf="loading">Loading brands…</p>
+
+<p *ngIf="!loading && brands.length === 0">No brands found. Create one to get started!</p>
+
+<table *ngIf="!loading && brands.length > 0">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let b of brands">
+      <td>{{ b.id }}</td>
+      <td>{{ b.name }}</td>
+      <td>
+        <button (click)="edit(b.id)">Edit</button>
+        <button (click)="delete(b.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

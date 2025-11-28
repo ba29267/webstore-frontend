@@ -1,0 +1,10 @@
+<h2>{{ id ? 'Edit Category' : 'New Category' }}</h2>
+
+<div *ngIf="loading">Loading...</div>
+
+<div *ngIf="!loading">
+  <label>Name:</label>
+  <input type="text" [(ngModel)]="model.name">
+
+  <button (click)="save()">Save</button>
+</div>

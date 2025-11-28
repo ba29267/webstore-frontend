@@ -1,19 +1,25 @@
 <div class="container">
-
   <p *ngIf="loading">Loading...</p>
 
-  <div *ngIf="product">
-
+  <div *ngIf="!loading && product">
     <h2>{{ product.name }}</h2>
 
-    <p><strong>Category:</strong> {{ product.category }}</p>
+    <p *ngIf="product.Category"><strong>Category:</strong> {{ product.Category.name }}</p>
+    <p *ngIf="product.Brand"><strong>Brand:</strong> {{ product.Brand.name }}</p>
+    <p *ngIf="product.Size"><strong>Size:</strong> {{ product.Size.name }}</p>
+    <p *ngIf="product.Color"><strong>Color:</strong> {{ product.Color.name }}</p>
+    <p *ngIf="product.Gender"><strong>Gender:</strong> {{ product.Gender.name }}</p>
 
     <p>{{ product.description }}</p>
 
     <p class="price">{{ product.price }}$</p>
 
-    <button (click)="addToCart()">Add to Cart</button>
+    <p><strong>In Stock:</strong> {{ product.quantity }}</p>
 
+    <button (click)="addToCart()" [disabled]="product.quantity === 0">
+      {{ product.quantity > 0 ? 'Add to Cart' : 'Out of Stock' }}
+    </button>
   </div>
 
+  <p *ngIf="!loading && !product">Product not found</p>
 </div>

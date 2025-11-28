@@ -1,1 +1,17 @@
-<p>admin-dashboard works!</p>
+<div class="admin-dashboard">
+  <div class="dashboard-header">
+    <h1>Admin Dashboard</h1>
+    <p>Manage your e-commerce store</p>
+  </div>
+
+  <div class="dashboard-grid">
+    <a *ngFor="let section of adminSections" 
+       [routerLink]="section.link" 
+       class="dashboard-card">
+      <div class="card-icon">{{ section.icon }}</div>
+      <h2>{{ section.title }}</h2>
+      <p>{{ section.description }}</p>
+      <span class="card-arrow">→</span>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<h2>{{ id ? 'Edit Gender' : 'New Gender' }}</h2>
+
+<div *ngIf="loading">Loading...</div>
+
+<div *ngIf="!loading">
+
+  <label>Name:</label>
+  <input type="text" [(ngModel)]="model.name">
+
+  <button (click)="save()">Save</button>
+
+</div>

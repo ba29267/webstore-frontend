@@ -7,7 +7,7 @@ const API = 'http://localhost:3000/reports';
 @Injectable({
   providedIn: 'root'
 })
-export class ReportService {
+export class ReportsService {
 
   constructor(private http: HttpClient) {}
 

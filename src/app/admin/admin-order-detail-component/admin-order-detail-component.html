@@ -1,0 +1,26 @@
+<h2>Order #{{ id }}</h2>
+
+<div *ngIf="!order">Loading...</div>
+
+<div *ngIf="order">
+
+  <h3>Customer</h3>
+  <p>{{ order.user?.email }}</p>
+
+  <h3>Items</h3>
+  <ul>
+    <li *ngFor="let item of order.items">
+      {{ item.productName }} – {{ item.quantity }} × {{ item.price }}$
+    </li>
+  </ul>
+
+  <h3>Total: {{ order.totalPrice }}$</h3>
+
+  <h3>Status</h3>
+  <select [(ngModel)]="order.status">
+    <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+  </select>
+
+  <button (click)="updateStatus()">Update Status</button>
+
+</div>

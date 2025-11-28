@@ -4,18 +4,25 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ProductListComponent } from './pages/product-list/product-list.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 import { MyOrdersComponent } from './pages/my-orders/my-orders.component';
-import { OrderListComponent } from './pages/order-list/order-list.component';
-import { OrderDetailComponent } from './pages/order-detail/order-detail.component';
-
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
-import { ManageCategoriesComponent } from './admin/manage-categories/manage-categories.component';
-import { ManageBrandsComponent } from './admin/manage-brands/manage-brands.component';
-import { ManageSizesComponent } from './admin/manage-sizes/manage-sizes.component';
-import { ManageColorsComponent } from './admin/manage-colors/manage-colors.component';
-import { ManageGendersComponent } from './admin/manage-genders/manage-genders.component';
-import { ReportsComponent } from './admin/reports/reports.component';
 import { CartComponent } from './pages/cart-component/cart-component.component';
 import { CheckoutComponent } from './pages/checkout-component/checkout-component.component';
+import { AdminProductListComponent } from './admin/admin-product-list-component/admin-product-list-component';
+import { AdminProductFormComponent } from './admin/admin-product-form-component/admin-product-form-component';
+import { AdminApplyDiscountComponent } from './admin/admin-apply-discount-component/admin-apply-discount-component';
+import { AdminOrderListComponent } from './admin/admin-order-list-component/admin-order-list-component';
+import { AdminOrderDetailComponent } from './admin/admin-order-detail-component/admin-order-detail-component';
+import { AdminCategoryListComponent } from './admin/admin-category-list-component/admin-category-list-component';
+import { AdminCategoryFormComponent } from './admin/admin-category-form-component/admin-category-form-component';
+import { AdminBrandListComponent } from './admin/admin-brand-list-component/admin-brand-list-component';
+import { AdminBrandFormComponent } from './admin/admin-brand-form-component/admin-brand-form-component';
+import { AdminSizeListComponent } from './admin/admin-size-list-component/admin-size-list-component';
+import { AdminSizeFormComponent } from './admin/admin-size-form-component/admin-size-form-component';
+import { AdminColorListComponent } from './admin/admin-color-list-component/admin-color-list-component';
+import { AdminColorFormComponent } from './admin/admin-color-form-component/admin-color-form-component';
+import { AdminGenderFormComponent } from './admin/admin-gender-form-component/admin-gender-form-component';
+import { AdminGenderListComponent } from './admin/admin-gender-list-component/admin-gender-list-component';
+import { AdminReportsComponent } from './admin/admin-reports-component/admin-reports-component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'products', pathMatch: 'full' },
@@ -26,18 +33,30 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'my-orders', component: MyOrdersComponent },
-  { path: 'my-orders', component: MyOrdersComponent },
-  { path: 'orders', component: OrderListComponent },
-  { path: 'orders/:id', component: OrderDetailComponent },
 
   // ADMIN AREA
   { path: 'admin', component: AdminDashboardComponent },
-  { path: 'admin/categories', component: ManageCategoriesComponent },
-  { path: 'admin/brands', component: ManageBrandsComponent },
-  { path: 'admin/sizes', component: ManageSizesComponent },
-  { path: 'admin/colors', component: ManageColorsComponent },
-  { path: 'admin/genders', component: ManageGendersComponent },
-  { path: 'admin/reports', component: ReportsComponent },
-
+  { path: 'admin/products', component: AdminProductListComponent },
+  { path: 'admin/products/create', component: AdminProductFormComponent },
+  { path: 'admin/products/edit/:id', component: AdminProductFormComponent },
+  { path: 'admin/products/:id/discount', component: AdminApplyDiscountComponent },
+  { path: 'admin/orders', component: AdminOrderListComponent },
+  { path: 'admin/orders/:id', component: AdminOrderDetailComponent },
+  { path: 'admin/categories', component: AdminCategoryListComponent },
+  { path: 'admin/categories/new', component: AdminCategoryFormComponent },
+  { path: 'admin/categories/:id', component: AdminCategoryFormComponent },
+  { path: 'admin/brands', component: AdminBrandListComponent },
+  { path: 'admin/brands/new', component: AdminBrandFormComponent },
+  { path: 'admin/brands/:id', component: AdminBrandFormComponent },
+  { path: 'admin/sizes', component: AdminSizeListComponent },
+  { path: 'admin/sizes/new', component: AdminSizeFormComponent },
+  { path: 'admin/sizes/:id', component: AdminSizeFormComponent },
+  { path: 'admin/colors', component: AdminColorListComponent },
+  { path: 'admin/colors/new', component: AdminColorFormComponent },
+  { path: 'admin/colors/:id', component: AdminColorFormComponent },
+  { path: 'admin/genders', component: AdminGenderListComponent },
+  { path: 'admin/genders/new', component: AdminGenderFormComponent },
+  { path: 'admin/genders/:id', component: AdminGenderFormComponent },
+  { path: 'admin/reports', component: AdminReportsComponent },
   { path: '**', redirectTo: 'products' } 
 ];

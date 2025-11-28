@@ -1,0 +1,60 @@
+<h2>Admin Reports</h2>
+
+<!-- === DAILY EARNINGS === -->
+<section>
+  <h3>Daily Earnings</h3>
+
+  <p *ngIf="loadingDaily">Loading...</p>
+
+  <table *ngIf="!loadingDaily">
+    <tr>
+      <th>Date</th>
+      <th>Total Earnings</th>
+    </tr>
+
+    <tr *ngFor="let d of daily">
+      <td>{{ d.date }}</td>
+      <td>{{ d.total }}</td>
+    </tr>
+  </table>
+</section>
+
+
+<!-- === MONTHLY EARNINGS === -->
+<section>
+  <h3>Monthly Earnings</h3>
+
+  <p *ngIf="loadingMonthly">Loading...</p>
+
+  <table *ngIf="!loadingMonthly">
+    <tr>
+      <th>Month</th>
+      <th>Total Earnings</th>
+    </tr>
+
+    <tr *ngFor="let m of monthly">
+      <td>{{ m.month }}</td>
+      <td>{{ m.total }}</td>
+    </tr>
+  </table>
+</section>
+
+
+<!-- === TOP PRODUCTS === -->
+<section>
+  <h3>Top Selling Products</h3>
+
+  <p *ngIf="loadingTop">Loading...</p>
+
+  <table *ngIf="!loadingTop">
+    <tr>
+      <th>Product</th>
+      <th>Sold QTY</th>
+    </tr>
+
+    <tr *ngFor="let p of top">
+      <td>{{ p.name }}</td>
+      <td>{{ p.sold_quantity }}</td>
+    </tr>
+  </table>
+</section>
