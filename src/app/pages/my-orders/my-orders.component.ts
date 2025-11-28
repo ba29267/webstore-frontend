@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OrderService } from '../../services/order';
 
@@ -14,7 +14,10 @@ export class MyOrdersComponent implements OnInit {
   orders: any[] = [];
   loading = true;
 
-  constructor(private orderService: OrderService) {}
+  constructor(
+    private orderService: OrderService,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.loadOrders();
@@ -25,9 +28,13 @@ export class MyOrdersComponent implements OnInit {
       next: (res) => {
         this.orders = res;
         this.loading = false;
+        this.cdr.detectChanges();
+        console.log('Orders loaded:', this.orders);
       },
-      error: () => {
+      error: (err) => {
+        console.error('Error loading orders:', err);
         this.loading = false;
+        this.cdr.detectChanges();
       }
     });
   }

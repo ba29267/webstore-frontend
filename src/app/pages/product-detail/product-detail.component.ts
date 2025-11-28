@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product';
 import { CartService } from '../../services/cart';
@@ -18,7 +18,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -33,15 +34,19 @@ export class ProductDetailComponent implements OnInit {
       next: (res) => {
         this.product = res;
         this.loading = false;
+        this.cdr.detectChanges();
+        console.log('Product loaded:', this.product);
       },
-      error: () => {
+      error: (err) => {
+        console.error('Error loading product:', err);
         this.loading = false;
+        this.cdr.detectChanges();
       }
     });
   }
 
-addToCart() {
-  this.cartService.addItem(this.product);
-  alert('Added to cart!');
-}
+  addToCart() {
+    this.cartService.addItem(this.product);
+    alert('Added to cart!');
+  }
 }

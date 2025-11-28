@@ -1,26 +1,76 @@
-<h2>Order #{{ id }}</h2>
+<div class="admin-form-container">
+  <div class="form-header">
+    <h1>Order #{{ id }}</h1>
+    <p>View and manage order details</p>
+  </div>
 
-<div *ngIf="!order">Loading...</div>
+  <p *ngIf="loading" class="loading-message">Loading order details...</p>
 
-<div *ngIf="order">
+  <p *ngIf="!loading && !order" class="empty-message">Order not found.</p>
 
-  <h3>Customer</h3>
-  <p>{{ order.user?.email }}</p>
+  <div *ngIf="!loading && order" class="order-detail-grid">
+    <div class="detail-card">
+      <h2>Customer Information</h2>
+      <div class="info-group">
+        <p><strong>Name:</strong> {{ order.Client?.name || 'N/A' }}</p>
+        <p><strong>Email:</strong> {{ order.Client?.email || 'N/A' }}</p>
+        <p><strong>Phone:</strong> {{ order.Client?.phone || 'N/A' }}</p>
+        <p><strong>Address:</strong> {{ order.Client?.address || 'N/A' }}</p>
+      </div>
+    </div>
 
-  <h3>Items</h3>
-  <ul>
-    <li *ngFor="let item of order.items">
-      {{ item.productName }} – {{ item.quantity }} × {{ item.price }}$
-    </li>
-  </ul>
+    <div class="detail-card">
+      <h2>Order Details</h2>
+      <div class="info-group">
+        <p><strong>Order Date:</strong> {{ order.createdAt | date:'medium' }}</p>
+        <p><strong>Last Updated:</strong> {{ order.updatedAt | date:'medium' }}</p>
+        <p><strong>Status:</strong> 
+          <span class="status-badge" [class]="'status-' + order.status?.toLowerCase()">{{ order.status }}</span>
+        </p>
+      </div>
+    </div>
 
-  <h3>Total: {{ order.totalPrice }}$</h3>
+    <div class="detail-card full-width">
+      <h2>Items</h2>
+      <div *ngIf="order.OrderItems && order.OrderItems.length > 0" class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of order.OrderItems">
+              <td>{{ item.Product?.name || 'Unknown Product' }}</td>
+              <td>{{ item.quantity }}</td>
+              <td>${{ item.price }}</td>
+              <td>${{ item.price * item.quantity }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p *ngIf="!order.OrderItems || order.OrderItems.length === 0" class="empty-message">No items in this order.</p>
+    </div>
 
-  <h3>Status</h3>
-  <select [(ngModel)]="order.status">
-    <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
-  </select>
+    <div class="detail-card">
+      <h2>Total</h2>
+      <p class="total-price">${{ order.total_price || 0 }}</p>
+      <p><small>{{ order.itemCount }} product type(s), {{ order.totalItems }} total items</small></p>
+    </div>
 
-  <button (click)="updateStatus()">Update Status</button>
-
+    <div class="detail-card full-width">
+      <h2>Update Status</h2>
+      <div class="status-update">
+        <select [(ngModel)]="order.status" [disabled]="updating" class="status-select">
+          <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+        </select>
+        <button class="btn-primary" (click)="updateStatus()" [disabled]="updating">
+          {{ updating ? 'Updating...' : 'Update Status' }}
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

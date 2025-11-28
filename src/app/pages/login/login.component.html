@@ -1,26 +1,38 @@
-<div class="login-container">
-  <h2>Login</h2>
+<div class="page-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h1>Login</h1>
+      <p>Sign in to your account</p>
+    </div>
 
-  <form (ngSubmit)="login()">
+    <form (ngSubmit)="login()">
+      <div class="form-group">
+        <label for="email">Email: *</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="your.email@example.com"
+          required
+        />
+      </div>
 
-    <label>Email</label>
-    <input
-      type="email"
-      [(ngModel)]="email"
-      name="email"
-      required
-    />
+      <div class="form-group">
+        <label for="password">Password: *</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Enter your password"
+          required
+        />
+      </div>
 
-    <label>Password</label>
-    <input
-      type="password"
-      [(ngModel)]="password"
-      name="password"
-      required
-    />
+      <button type="submit" class="btn-primary">Login</button>
 
-    <button type="submit">Login</button>
-
-    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
-  </form>
+      <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+    </form>
+  </div>
 </div>

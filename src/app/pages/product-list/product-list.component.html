@@ -1,50 +1,45 @@
-<div class="container">
-  <h2>Products</h2>
-
-  <!-- Debug: Remove this after fixing -->
-  <div style="background: #f0f0f0; padding: 5px; margin: 5px 0; font-size: 12px;">
-    Loading: {{ loading }} | Products: {{ products.length }} | Filtered: {{ filtered.length }}
+<div class="page-container">
+  <div class="page-header">
+    <h1>Products</h1>
+    <p>Browse our collection</p>
   </div>
 
-  <div class="filters">
-    <input
-      type="text"
-      placeholder="Search..."
-      [(ngModel)]="search"
-      (input)="applyFilters()"
-    />
+  <div class="filters-card">
+    <div class="filters">
+      <input
+        type="text"
+        placeholder="Search products..."
+        [(ngModel)]="search"
+        (input)="applyFilters()"
+        class="search-input"
+      />
 
-    <select [(ngModel)]="category" (change)="applyFilters()">
-      <option value="">All categories</option>
-      <option *ngFor="let c of categories" [value]="c">
-        {{ c }}
-      </option>
-    </select>
-  </div>
-
-  <!-- Loading state -->
-  <p *ngIf="loading">Loading products...</p>
-
-  <!-- Error state -->
-  <p *ngIf="error" style="color: red;">Error: {{ error }}</p>
-
-  <!-- Products grid - only show when NOT loading -->
-  <div class="grid" *ngIf="!loading">
-    <div *ngIf="filtered.length === 0 && !error">
-      <p>No products found.</p>
+      <select [(ngModel)]="category" (change)="applyFilters()" class="category-select">
+        <option value="">All categories</option>
+        <option *ngFor="let c of categories" [value]="c">
+          {{ c }}
+        </option>
+      </select>
     </div>
+  </div>
+
+  <p *ngIf="loading" class="loading-message">Loading products...</p>
+
+  <p *ngIf="error" class="error-message">Error: {{ error }}</p>
+
+  <div class="products-grid" *ngIf="!loading">
+    <p *ngIf="filtered.length === 0 && !error" class="empty-message">No products found.</p>
     
     <div class="product-card" *ngFor="let p of filtered">
-      <a [routerLink]="['/products', p.id]">
-  <h3>{{ p.name }}</h3>
-</a>
-      <p>{{ p.description }}</p>
-      <p><b>{{ p.price }}$</b></p>
-      <p *ngIf="p.Category" style="font-size: 12px; color: #666;">
+      <a [routerLink]="['/products', p.id]" class="product-link">
+        <h3>{{ p.name }}</h3>
+      </a>
+      <p class="product-description">{{ p.description }}</p>
+      <p class="product-price"><b>${{ p.price }}</b></p>
+      <p *ngIf="p.Category" class="product-category">
         Category: {{ p.Category.name }}
       </p>
-      <button
-      (click)="addToCart()">Add to Cart</button>
+      <button class="btn-primary" (click)="addToCart()">Add to Cart</button>
     </div>
   </div>
 </div>

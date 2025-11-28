@@ -1,26 +1,122 @@
-<h2>{{ isEdit ? 'Edit Product' : 'Create Product' }}</h2>
+<div class="admin-form-container">
+  <div class="form-header">
+    <h1>{{ isEdit ? 'Edit Product' : 'Create Product' }}</h1>
+    <p>{{ isEdit ? 'Update product information' : 'Add a new product to your store' }}</p>
+  </div>
 
-<form (ngSubmit)="submit()">
-  <input type="text" placeholder="Name" [(ngModel)]="product.name" name="name" required>
+  <p *ngIf="loading" class="loading-message">Loading product data...</p>
 
-  <textarea placeholder="Description" [(ngModel)]="product.description" name="desc"></textarea>
+  <div *ngIf="!loading" class="form-card">
+    <form (ngSubmit)="submit()">
+    <div class="form-group">
+      <label for="name">Name: *</label>
+      <input 
+        type="text" 
+        id="name"
+        [(ngModel)]="product.name" 
+        name="name" 
+        required
+        [disabled]="submitting">
+    </div>
 
-  <input type="number" placeholder="Price" [(ngModel)]="product.price" name="price" required>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea 
+        id="description"
+        [(ngModel)]="product.description" 
+        name="desc"
+        rows="4"
+        [disabled]="submitting"></textarea>
+    </div>
 
-  <input type="number" placeholder="Quantity" [(ngModel)]="product.quantity" name="qty" required>
+    <div class="form-group">
+      <label for="price">Price: *</label>
+      <input 
+        type="number" 
+        id="price"
+        [(ngModel)]="product.price" 
+        name="price" 
+        min="0"
+        step="0.01"
+        required
+        [disabled]="submitting">
+    </div>
 
-  <!-- The below fields expect IDs — you may replace these with dropdowns when you build Category/Brand management -->
-  <input type="number" placeholder="Brand ID" [(ngModel)]="product.brandId" name="brand">
+    <div class="form-group">
+      <label for="quantity">Quantity: *</label>
+      <input 
+        type="number" 
+        id="quantity"
+        [(ngModel)]="product.quantity" 
+        name="qty" 
+        min="0"
+        required
+        [disabled]="submitting">
+    </div>
 
-  <input type="number" placeholder="Category ID" [(ngModel)]="product.categoryId" name="cat">
+    <div class="form-group">
+      <label for="brandId">Brand ID:</label>
+      <input 
+        type="number" 
+        id="brandId"
+        [(ngModel)]="product.brandId" 
+        name="brand"
+        [disabled]="submitting">
+      <small>Leave empty if no brand</small>
+    </div>
 
-  <input type="number" placeholder="Size ID" [(ngModel)]="product.sizeId" name="size">
+    <div class="form-group">
+      <label for="categoryId">Category ID:</label>
+      <input 
+        type="number" 
+        id="categoryId"
+        [(ngModel)]="product.categoryId" 
+        name="cat"
+        [disabled]="submitting">
+      <small>Leave empty if no category</small>
+    </div>
 
-  <input type="number" placeholder="Color ID" [(ngModel)]="product.colorId" name="color">
+    <div class="form-group">
+      <label for="sizeId">Size ID:</label>
+      <input 
+        type="number" 
+        id="sizeId"
+        [(ngModel)]="product.sizeId" 
+        name="size"
+        [disabled]="submitting">
+      <small>Leave empty if no size</small>
+    </div>
 
-  <input type="number" placeholder="Gender ID" [(ngModel)]="product.genderId" name="gender">
+    <div class="form-group">
+      <label for="colorId">Color ID:</label>
+      <input 
+        type="number" 
+        id="colorId"
+        [(ngModel)]="product.colorId" 
+        name="color"
+        [disabled]="submitting">
+      <small>Leave empty if no color</small>
+    </div>
 
-  <button type="submit">
-    {{ isEdit ? 'Update' : 'Create' }}
-  </button>
-</form>
+    <div class="form-group">
+      <label for="genderId">Gender ID:</label>
+      <input 
+        type="number" 
+        id="genderId"
+        [(ngModel)]="product.genderId" 
+        name="gender"
+        [disabled]="submitting">
+      <small>Leave empty if no gender</small>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="submitting">
+        {{ submitting ? 'Saving...' : (isEdit ? 'Update' : 'Create') }}
+      </button>
+      <button type="button" (click)="cancel()" [disabled]="submitting">
+        Cancel
+      </button>
+    </div>
+    </form>
+  </div>
+</div>

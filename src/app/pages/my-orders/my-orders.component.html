@@ -1,29 +1,38 @@
-<h2>My Orders</h2>
+<div class="page-container">
+  <div class="page-header">
+    <h1>My Orders</h1>
+    <p>View your order history</p>
+  </div>
 
-<p *ngIf="loading">Loading orders...</p>
+  <p *ngIf="loading" class="loading-message">Loading orders...</p>
 
-<div *ngIf="!loading && orders.length === 0">
-  <p>You have no orders yet.</p>
-</div>
+  <p *ngIf="!loading && orders.length === 0" class="empty-message">You have no orders yet.</p>
 
-<div *ngFor="let order of orders" class="order-card">
+  <div *ngIf="!loading && orders.length > 0" class="orders-grid">
+    <div *ngFor="let order of orders" class="order-card">
+      <div class="order-header">
+        <h3>Order #{{ order.id }}</h3>
+        <span class="status-badge" [class]="'status-' + order.status?.toLowerCase()">{{ order.status }}</span>
+      </div>
 
-  <h3>Order #{{ order.id }}</h3>
+      <div class="order-info">
+        <p><strong>Date:</strong> {{ order.createdAt | date:'medium' }}</p>
+        <p><strong>Total:</strong> ${{ order.total_price || 0 }}</p>
+        <p><strong>Client:</strong> {{ order.Client?.name || 'N/A' }}</p>
+      </div>
 
-  <p><strong>Status:</strong> {{ order.status }}</p>
-
-  <p><strong>Date:</strong> {{ order.createdAt | date:'medium' }}</p>
-
-  <h4>Items:</h4>
-
-  <ul>
-    <li *ngFor="let item of order.items">
-      {{ item.product.name }}  
-      — Qty: {{ item.quantity }}  
-      — Price: {{ item.product.price }}$
-    </li>
-  </ul>
-
-  <hr>
-
+      <div class="order-items">
+        <h4>Items ({{ order.itemCount }} type(s), {{ order.totalItems }} total):</h4>
+        <ul *ngIf="order.OrderItems && order.OrderItems.length > 0">
+          <li *ngFor="let item of order.OrderItems">
+            {{ item.Product?.name || 'Unknown Product' }}  
+            — Qty: {{ item.quantity }}  
+            — Price: ${{ item.price }}
+            — Subtotal: ${{ item.price * item.quantity }}
+          </li>
+        </ul>
+        <p *ngIf="!order.OrderItems || order.OrderItems.length === 0">No items</p>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,34 +1,43 @@
-<h2>Admin – Products</h2>
+<div class="admin-list-container">
+  <div class="list-header">
+    <h1>Products</h1>
+    <p>Manage your product catalog</p>
+  </div>
 
-<button (click)="create()">Create Product</button>
+  <div class="list-actions">
+    <button class="btn-primary" (click)="create()">+ Create Product</button>
+  </div>
 
-<p *ngIf="loading">Loading...</p>
+  <p *ngIf="loading" class="loading-message">Loading...</p>
 
-<p *ngIf="!loading && products.length === 0">No products found.</p>
+  <p *ngIf="!loading && products.length === 0" class="empty-message">No products found.</p>
 
-<table *ngIf="!loading && products.length > 0">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Brand</th>
-      <th>Category</th>
-      <th>Quantity</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let p of products">
-      <td>{{ p.name }}</td>
-      <td>${{ p.price }}</td>
-      <td>{{ p.Brand?.name || 'N/A' }}</td>
-      <td>{{ p.Category?.name || 'N/A' }}</td>
-      <td>{{ p.quantity }}</td>
-      <td>
-        <button (click)="edit(p.id)">Edit</button>
-        <button (click)="discount(p.id)">Discount</button>
-        <button (click)="delete(p.id)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <div *ngIf="!loading && products.length > 0" class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Brand</th>
+          <th>Category</th>
+          <th>Quantity</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of products">
+          <td>{{ p.name }}</td>
+          <td>${{ p.price }}</td>
+          <td>{{ p.Brand?.name || 'N/A' }}</td>
+          <td>{{ p.Category?.name || 'N/A' }}</td>
+          <td>{{ p.quantity }}</td>
+          <td class="actions-cell">
+            <button class="btn-edit" (click)="edit(p.id)">Edit</button>
+            <button class="btn-secondary" (click)="discount(p.id)">Discount</button>
+            <button class="btn-danger" (click)="delete(p.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

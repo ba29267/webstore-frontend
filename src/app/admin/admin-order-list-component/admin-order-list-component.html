@@ -1,30 +1,26 @@
-<h2>Admin – Orders</h2>
+<div class="admin-list-container">
+  <div class="list-header">
+    <h1>Orders</h1>
+    <p>View and manage all customer orders</p>
+  </div>
 
-<p *ngIf="loading">Loading orders…</p>
+  <p *ngIf="loading" class="loading-message">Loading orders...</p>
 
-<p *ngIf="!loading && orders.length === 0">No orders found.</p>
+  <p *ngIf="!loading && orders.length === 0" class="empty-message">No orders found.</p>
 
-<table *ngIf="!loading && orders.length > 0">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>User</th>
-      <th>Total</th>
-      <th>Status</th>
-      <th>Date</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let o of orders">
-      <td>{{ o.id }}</td>
-      <td>{{ o.user?.email }}</td>
-      <td>${{ o.totalPrice }}</td>
-      <td>{{ o.status }}</td>
-      <td>{{ o.createdAt | date }}</td>
-      <td>
-        <button (click)="openOrder(o.id)">View</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <div *ngIf="!loading && orders.length > 0" class="orders-grid">
+    <div *ngFor="let order of orders" class="order-card" (click)="openOrder(order.id)">
+      <div class="order-header">
+        <h3>Order #{{ order.id }}</h3>
+        <span class="status-badge" [class]="'status-' + order.status?.toLowerCase()">{{ order.status }}</span>
+      </div>
+      
+      <div class="order-info">
+        <p><strong>Date:</strong> {{ order.createdAt | date:'medium' }}</p>
+        <p><strong>Client:</strong> {{ order.Client?.name || 'N/A' }}</p>
+        <p><strong>Total:</strong> ${{ order.total_price || 0 }}</p>
+        <p><strong>Items:</strong> {{ order.itemCount }} type(s), {{ order.totalItems }} total</p>
+      </div>
+    </div>
+  </div>
+</div>

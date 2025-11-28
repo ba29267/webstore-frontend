@@ -1,27 +1,36 @@
-<h2>Admin – Brands</h2>
+<div class="admin-list-container">
+  <div class="list-header">
+    <h1>Brands</h1>
+    <p>Manage product brands</p>
+  </div>
 
-<button (click)="create()">+ New Brand</button>
+  <div class="list-actions">
+    <button class="btn-primary" (click)="create()">+ New Brand</button>
+  </div>
 
-<p *ngIf="loading">Loading brands…</p>
+  <p *ngIf="loading" class="loading-message">Loading brands…</p>
 
-<p *ngIf="!loading && brands.length === 0">No brands found. Create one to get started!</p>
+  <p *ngIf="!loading && brands.length === 0" class="empty-message">No brands found. Create one to get started!</p>
 
-<table *ngIf="!loading && brands.length > 0">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let b of brands">
-      <td>{{ b.id }}</td>
-      <td>{{ b.name }}</td>
-      <td>
-        <button (click)="edit(b.id)">Edit</button>
-        <button (click)="delete(b.id)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <div *ngIf="!loading && brands.length > 0" class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let b of brands">
+          <td>{{ b.id }}</td>
+          <td>{{ b.name }}</td>
+          <td class="actions-cell">
+            <button class="btn-edit" (click)="edit(b.id)">Edit</button>
+            <button class="btn-danger" (click)="delete(b.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

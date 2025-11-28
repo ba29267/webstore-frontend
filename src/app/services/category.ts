@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({ providedIn: 'root' })
 export class CategoryService {
 
-  api = "http://localhost:3000";
+  api = "http://localhost:3000/admin";
 
   constructor(private http: HttpClient) {}
 

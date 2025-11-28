@@ -1,27 +1,36 @@
-<h2>Admin – Genders</h2>
+<div class="admin-list-container">
+  <div class="list-header">
+    <h1>Genders</h1>
+    <p>Manage product gender categories</p>
+  </div>
 
-<button (click)="create()">+ New Gender</button>
+  <div class="list-actions">
+    <button class="btn-primary" (click)="create()">+ New Gender</button>
+  </div>
 
-<p *ngIf="loading">Loading genders…</p>
+  <p *ngIf="loading" class="loading-message">Loading genders…</p>
 
-<p *ngIf="!loading && genders.length === 0">No genders found. Create one to get started!</p>
+  <p *ngIf="!loading && genders.length === 0" class="empty-message">No genders found. Create one to get started!</p>
 
-<table *ngIf="!loading && genders.length > 0">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let g of genders">
-      <td>{{ g.id }}</td>
-      <td>{{ g.name }}</td>
-      <td>
-        <button (click)="edit(g.id)">Edit</button>
-        <button (click)="delete(g.id)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <div *ngIf="!loading && genders.length > 0" class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let g of genders">
+          <td>{{ g.id }}</td>
+          <td>{{ g.name }}</td>
+          <td class="actions-cell">
+            <button class="btn-edit" (click)="edit(g.id)">Edit</button>
+            <button class="btn-danger" (click)="delete(g.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

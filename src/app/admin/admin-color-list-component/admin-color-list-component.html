@@ -1,35 +1,44 @@
-<h2>Admin – Colors</h2>
+<div class="admin-list-container">
+  <div class="list-header">
+    <h1>Colors</h1>
+    <p>Manage product colors</p>
+  </div>
 
-<button (click)="create()">+ New Color</button>
+  <div class="list-actions">
+    <button class="btn-primary" (click)="create()">+ New Color</button>
+  </div>
 
-<p *ngIf="loading">Loading colors…</p>
+  <p *ngIf="loading" class="loading-message">Loading colors…</p>
 
-<p *ngIf="!loading && colors.length === 0">No colors found. Create one to get started!</p>
+  <p *ngIf="!loading && colors.length === 0" class="empty-message">No colors found. Create one to get started!</p>
 
-<table *ngIf="!loading && colors.length > 0">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Preview</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let c of colors">
-      <td>{{ c.id }}</td>
-      <td>{{ c.name }}</td>
-      <td>
-        <span 
-          [style.background]="c.hex" 
-          [title]="c.hex"
-          style="display:inline-block;width:30px;height:20px;border:1px solid #ccc;border-radius:3px;">
-        </span>
-      </td>
-      <td>
-        <button (click)="edit(c.id)">Edit</button>
-        <button (click)="delete(c.id)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <div *ngIf="!loading && colors.length > 0" class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Preview</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of colors">
+          <td>{{ c.id }}</td>
+          <td>{{ c.name }}</td>
+          <td>
+            <span 
+              class="color-preview"
+              [style.background]="c.hex" 
+              [title]="c.hex">
+            </span>
+          </td>
+          <td class="actions-cell">
+            <button class="btn-edit" (click)="edit(c.id)">Edit</button>
+            <button class="btn-danger" (click)="delete(c.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

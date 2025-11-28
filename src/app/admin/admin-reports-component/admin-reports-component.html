@@ -1,60 +1,74 @@
-<h2>Admin Reports</h2>
+<div class="admin-list-container">
+  <div class="list-header">
+    <h1>Reports</h1>
+    <p>View sales analytics and insights</p>
+  </div>
 
-<!-- === DAILY EARNINGS === -->
-<section>
-  <h3>Daily Earnings</h3>
+  <div class="reports-grid">
+    <!-- === DAILY EARNINGS === -->
+    <section class="report-card">
+      <h2>Daily Earnings</h2>
+      <p *ngIf="loadingDaily" class="loading-message">Loading...</p>
+      <div *ngIf="!loadingDaily" class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Total Earnings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let d of daily">
+              <td>{{ d.date }}</td>
+              <td>${{ d.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-  <p *ngIf="loadingDaily">Loading...</p>
+    <!-- === MONTHLY EARNINGS === -->
+    <section class="report-card">
+      <h2>Monthly Earnings</h2>
+      <p *ngIf="loadingMonthly" class="loading-message">Loading...</p>
+      <div *ngIf="!loadingMonthly" class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>Total Earnings</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of monthly">
+              <td>{{ m.month }}</td>
+              <td>${{ m.total }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-  <table *ngIf="!loadingDaily">
-    <tr>
-      <th>Date</th>
-      <th>Total Earnings</th>
-    </tr>
-
-    <tr *ngFor="let d of daily">
-      <td>{{ d.date }}</td>
-      <td>{{ d.total }}</td>
-    </tr>
-  </table>
-</section>
-
-
-<!-- === MONTHLY EARNINGS === -->
-<section>
-  <h3>Monthly Earnings</h3>
-
-  <p *ngIf="loadingMonthly">Loading...</p>
-
-  <table *ngIf="!loadingMonthly">
-    <tr>
-      <th>Month</th>
-      <th>Total Earnings</th>
-    </tr>
-
-    <tr *ngFor="let m of monthly">
-      <td>{{ m.month }}</td>
-      <td>{{ m.total }}</td>
-    </tr>
-  </table>
-</section>
-
-
-<!-- === TOP PRODUCTS === -->
-<section>
-  <h3>Top Selling Products</h3>
-
-  <p *ngIf="loadingTop">Loading...</p>
-
-  <table *ngIf="!loadingTop">
-    <tr>
-      <th>Product</th>
-      <th>Sold QTY</th>
-    </tr>
-
-    <tr *ngFor="let p of top">
-      <td>{{ p.name }}</td>
-      <td>{{ p.sold_quantity }}</td>
-    </tr>
-  </table>
-</section>
+    <!-- === TOP PRODUCTS === -->
+    <section class="report-card full-width">
+      <h2>Top Selling Products</h2>
+      <p *ngIf="loadingTop" class="loading-message">Loading...</p>
+      <div *ngIf="!loadingTop" class="table-card">
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Sold QTY</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of top">
+              <td>{{ p.name }}</td>
+              <td>{{ p.sold_quantity }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
