@@ -1,25 +1,68 @@
 <nav class="navbar">
-  <div class="nav-left">
-    <a routerLink="/" class="brand">MyShop</a>
+  <div class="navbar-container">
+    <div class="nav-left">
+      <a routerLink="/" class="brand" routerLinkActive="active">
+        <span class="brand-icon">🛍️</span>
+        <span class="brand-text">MyShop</span>
+      </a>
 
-    <a routerLink="/products">Products</a>
+      <div class="nav-links">
+        <a routerLink="/products" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+          Products
+        </a>
 
-    <a *ngIf="isLoggedIn && role === 'admin'" routerLink="/admin">
-      Admin Panel
-    </a>
-  </div>
+        <a *ngIf="isLoggedIn && role === 'admin'" 
+           routerLink="/admin" 
+           routerLinkActive="active"
+           class="admin-link">
+          <span class="link-icon">⚙️</span>
+          Admin Panel
+        </a>
+      </div>
+    </div>
 
-  <div class="nav-right">
-    <span *ngIf="isLoggedIn" class="role">
-      Role: {{ role }}
-    </span>
+    <div class="nav-right">
+      <ng-container *ngIf="isLoggedIn">
+        <div class="user-info">
+          <span class="role-badge" [class]="'role-' + role?.toLowerCase()">
+            {{ role }}
+          </span>
+        </div>
 
-    <ng-container *ngIf="!isLoggedIn">
-      <a routerLink="/login">Login</a>
-      <a routerLink="/register">Register</a>
-    </ng-container>
-    <a routerLink="/cart" *ngIf="isLoggedIn">Cart</a>
-    <a routerLink="/my-orders" *ngIf="isLoggedIn">My Orders</a>
-    <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+        <a routerLink="/cart" 
+           routerLinkActive="active" 
+           class="nav-link-icon"
+           title="Shopping Cart">
+          <span class="icon">🛒</span>
+          <span class="link-text">Cart</span>
+        </a>
+
+        <a routerLink="/my-orders" 
+           routerLinkActive="active"
+           class="nav-link-icon"
+           title="My Orders">
+          <span class="icon">📦</span>
+          <span class="link-text">Orders</span>
+        </a>
+
+        <button class="btn-logout" (click)="logout()" title="Logout">
+          <span class="icon">🚪</span>
+          <span class="btn-text">Logout</span>
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="!isLoggedIn">
+        <a routerLink="/login" 
+           routerLinkActive="active"
+           class="btn-nav btn-login">
+          Login
+        </a>
+        <a routerLink="/register" 
+           routerLinkActive="active"
+           class="btn-nav btn-register">
+          Register
+        </a>
+      </ng-container>
+    </div>
   </div>
 </nav>
